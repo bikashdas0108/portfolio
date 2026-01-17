@@ -1,5 +1,5 @@
 const experienceContainerElement = document.getElementById(
-  "experienceContainer"
+  "experienceContainer",
 );
 
 const getBorder = (num) => {
@@ -33,9 +33,14 @@ const experiences = [
     ],
     data: [
       {
-        role: "Senior Frontend Engineer",
+        role: "Senior Software Engineer (SDE3)",
         description:
-          "My role as a Senior Engineer involves decision making, planning, coding, performance monitoring, security measuring, mentoring and code reviews.",
+          "Leading and scaling the frontend team while driving architectural decisions, feature roadmaps, and end-to-end project delivery. Spearheading performance optimization, monitoring, and observability initiatives. Actively mentoring engineers and establishing best practices through comprehensive code reviews.",
+      },
+      {
+        role: "Senior Frontend Engineer (SDE2)",
+        description:
+          "My role as a Senior Frontend Engineer involves decision making, planning, coding, performance monitoring, security measuring, mentoring and code reviews.",
       },
     ],
   },
@@ -85,14 +90,14 @@ const showExperiences = () => {
   const experienceHtml = experiences.map((experience, i = 0) => {
     const techList = experience.techStack?.map(
       (techItem) =>
-        `<span class='tech' style='${getColor(techItem)}'>#${techItem}</span>`
+        `<span class='tech' style='${getColor(techItem)}'>#${techItem}</span>`,
     );
 
     const description = experience.data?.map(
       (dataItem) => `<div class='data-wrapper'>
         <div class='role'>${dataItem.role}</div>
         <div class='description'>${dataItem.description}</div>
-      </div>`
+      </div>`,
     );
 
     return `<div style='${getBorder(i + 1)}' class="experience-wrapper">
