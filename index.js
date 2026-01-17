@@ -45,11 +45,11 @@ showInfoText();
 
 function downloadPDF() {
   downloadButtonElement.removeEventListener("click", downloadPDF);
-  const pdfPath = "./src/pdf/BikashDasResume.pdf";
+  const pdfPath = "./src/pdf/Bikash_das_SDE_resume_2026.pdf";
   // Create an anchor element to trigger the download
   const link = document.createElement("a");
   link.href = pdfPath;
-  link.download = "BikashDasResume.pdf";
+  link.download = "Bikash_das_SDE_resume_2026.pdf";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
