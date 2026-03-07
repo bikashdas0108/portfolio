@@ -59,8 +59,8 @@ const showSkills = () => {
   // Build DOM using safe methods (no innerHTML with user data)
   const fragment = document.createDocumentFragment();
 
-  let delay = 0;
   skillCategories.forEach((category) => {
+    let delay = 0;
     const categoryDiv = document.createElement("div");
     categoryDiv.className = "skill-category reveal";
 
@@ -75,8 +75,8 @@ const showSkills = () => {
     category.skills.forEach((skill) => {
       delay++;
       const skillDiv = document.createElement("div");
-      skillDiv.className = "skill reveal";
-      skillDiv.setAttribute("data-delay", Math.min(delay, 8));
+      skillDiv.className = "skill";
+      skillDiv.style.setProperty("--skill-delay", `${Math.min(delay, 8) * 0.1}s`);
 
       if (skill.logo) {
         const logoWrapper = document.createElement("div");

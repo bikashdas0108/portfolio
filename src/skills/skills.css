@@ -51,6 +51,16 @@
   min-width: 90px;
   transition: all var(--transition-base);
   cursor: default;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.skill-category.active .skill {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease,
+              border-color var(--transition-base), box-shadow var(--transition-base);
+  transition-delay: var(--skill-delay, 0s);
 }
 
 .skill:hover {
@@ -124,5 +134,13 @@
 
   .skill-name {
     font-size: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
