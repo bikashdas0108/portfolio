@@ -1,48 +1,128 @@
+/* ===== Skills Section ===== */
 .skills-page {
-  padding: 3rem 6rem;
+  background: var(--bg-primary);
 }
 
 .skills-container {
   display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.skill-category {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: border-color var(--transition-base);
+}
+
+.skill-category:hover {
+  border-color: var(--border-hover);
+}
+
+.skill-category-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-category-grid {
+  display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: flex-start;
+  gap: 1.25rem;
 }
 
 .skill {
-  flex: 1 1 0;
-  padding: 0.5rem 2.25rem;
-  text-align: center;
-  font-style: italic;
-  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 90px;
+  transition: all var(--transition-base);
+  cursor: default;
 }
 
 .skill:hover {
-  transform: scale(1.4);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-4px);
+}
+
+.skill-logo-wrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .skill-logo {
-  height: 100px;
-  max-width: 100px;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
-@media only screen and (max-width: 1199px) {
-  .skills-page {
-    padding: 3rem 4rem;
+.skill-text-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-glow), var(--purple-glow));
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.skill-name {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ===== Responsive ===== */
+@media only screen and (max-width: 768px) {
+  .skill-category {
+    padding: 1.5rem 1rem;
   }
-}
 
-@media only screen and (max-width: 799px) {
-  .skills-page {
-    padding: 1.5rem;
+  .skill-category-grid {
+    gap: 0.75rem;
+    justify-content: center;
   }
 
   .skill {
-    padding: 0.5rem 0;
+    padding: 0.75rem 1rem;
+    min-width: 80px;
   }
 
-  .skill-logo {
-    height: 75px;
-    max-width: 75px;
+  .skill-logo-wrapper,
+  .skill-logo,
+  .skill-text-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .skill-text-icon {
+    font-size: 0.75rem;
+  }
+
+  .skill-name {
+    font-size: 0.7rem;
   }
 }
