@@ -1,101 +1,205 @@
+/* ===== Experience Timeline ===== */
 .experience-page {
-  padding: 3rem 6rem;
+  background: var(--bg-secondary);
 }
 
 .experience-container {
-  width: fit-content;
+  position: relative;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding-left: 2.5rem;
 }
 
-.experience-wrapper {
+/* Timeline vertical line */
+.experience-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--purple), var(--green));
+  opacity: 0.3;
+}
+
+/* Timeline item */
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Timeline dot */
+.timeline-dot {
+  position: absolute;
+  left: -2.5rem;
+  top: 1.75rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translateX(-6px);
+  z-index: 2;
+}
+
+/* Timeline card */
+.timeline-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all var(--transition-base);
+}
+
+.timeline-card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--border-hover);
+}
+
+/* Header */
+.timeline-card-header {
   display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  padding: 1rem 2rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
 }
 
-.experience-wrapper-left {
-  min-width: 240px;
-  color: gray;
-}
-
-.company {
-  font-size: 1.5rem;
+.exp-company {
+  font-size: 1.35rem;
   font-weight: 600;
-  color: cadetblue;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
   cursor: pointer;
 }
 
-.location,
-.duration {
+.exp-company:hover {
+  color: var(--accent);
+}
+
+.exp-location {
+  font-size: 0.85rem;
+  color: var(--text-muted);
   font-style: italic;
 }
 
-.data-wrapper {
-  padding-bottom: 0.75rem;
+.exp-duration {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  white-space: nowrap;
+  padding: 0.3rem 0.75rem;
+  background: var(--accent-glow);
+  border-radius: 6px;
+  flex-shrink: 0;
 }
 
-.role {
-  font-size: 1.25rem;
+/* Roles */
+.exp-roles {
+  margin-bottom: 1.25rem;
+}
+
+.exp-role-block {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.exp-role-block:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.exp-role {
+  font-size: 1.05rem;
   font-weight: 600;
-  opacity: 0.75;
-  padding-bottom: 0.5rem;
+  color: var(--text-primary);
+  opacity: 0.85;
+  margin-bottom: 0.5rem;
 }
 
-.description {
-  opacity: 0.75;
+.exp-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-@media only screen and (max-width: 1199px) {
-  .experience-page {
-    padding: 3rem 4rem;
-  }
+.exp-highlight {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--green);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
 
+.exp-description {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Tech list */
+.exp-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.exp-tech {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* ===== Responsive ===== */
+@media only screen and (max-width: 768px) {
   .experience-container {
-    padding: 1rem 0;
+    padding-left: 2rem;
   }
 
-  .experience-wrapper {
-    gap: 1rem;
-    padding: 1rem;
-  }
-  .experience-wrapper-left {
-    min-width: 30%;
-  }
-}
-
-@media only screen and (max-width: 799px) {
-  .experience-page {
-    padding: 1.5rem;
+  .timeline-dot {
+    left: -2rem;
+    width: 12px;
+    height: 12px;
+    transform: translateX(-5px);
   }
 
-  .experience-wrapper {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
+  .timeline-card {
+    padding: 1.5rem 1.25rem;
   }
 
-  .company {
-    font-size: 1rem;
-    font-weight: 600;
+  .timeline-card-header {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .location,
-  .duration {
-    font-size: 0.75rem;
+  .exp-company {
+    font-size: 1.15rem;
   }
 
-  .role {
-    font-size: 1rem;
+  .exp-duration {
+    align-self: flex-start;
   }
 
-  .data-wrapper {
-    padding-bottom: 0.5rem;
+  .exp-role {
+    font-size: 0.95rem;
   }
 
-  .description {
-    font-size: 0.75rem;
+  .exp-description {
+    font-size: 0.82rem;
+  }
+
+  .exp-highlight {
+    font-size: 0.65rem;
   }
 }

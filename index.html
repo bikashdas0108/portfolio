@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bikash Das - Senior Software Engineer with 5+ years of experience specializing in Frontend Development. IIT Guwahati graduate."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="src/skills/skills.css" />
     <link rel="stylesheet" href="src/projects/projects.css" />
@@ -12,144 +22,387 @@
     <script src="src/skills/skills.js" defer></script>
     <script src="src/projects/projects.js" defer></script>
     <script src="src/workExperiences/workExperiences.js" defer></script>
-    <title>Bikash Das</title>
+    <title>Bikash Das | Software Developer</title>
   </head>
   <body>
-    <div id="home" class="home-page">
-      <div class="header">
-        <a href="#home" class="header-home-link"
-          ><div class="header-item">Home</div></a
+    <!-- Skip to content for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+      <a href="#home" class="nav-logo" aria-label="Home">
+        <span class="logo-text">&lt;BD /&gt;</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link active" data-section="home">Home</a>
+        <a href="#about" class="nav-link" data-section="about">About</a>
+        <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+        <a href="#workExperience" class="nav-link" data-section="workExperience"
+          >Experience</a
         >
-        <a href="#skills"><div class="header-item">Skills</div></a>
-        <a href="#projects"><div class="header-item">Projects</div></a>
-        <a href="#workExperience" class="work-link"
-          ><div class="header-item">Work Experiences</div></a
+        <a href="#projects" class="nav-link" data-section="projects"
+          >Projects</a
         >
-        <a href="#workExperience" class="work-link-mobile"
-          ><div class="header-item">Work</div></a
+        <a href="#achievements" class="nav-link" data-section="achievements"
+          >Achievements</a
         >
-        <a href="#about"><div class="header-item">About</div></a>
+        <a href="#contact" class="nav-link" data-section="contact">Contact</a>
       </div>
-      <div class="intro">
-        <div class="intro-left-section">
-          <div class="name">Bikash Das</div>
-          <div id="introText" class="intro-text"></div>
-          <button class="download-button" id="downloadButton">
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main id="main">
+      <!-- Hero Section -->
+      <section id="home" class="hero-section">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-content">
+          <div class="hero-text">
+            <p class="hero-greeting reveal" data-delay="1">Hi, my name is</p>
+            <h1 class="hero-name reveal" data-delay="2">Bikash Das</h1>
+            <div class="hero-tagline reveal" data-delay="3">
+              <span class="tagline-static">I am a </span>
+              <span class="typewriter" id="typewriter"></span>
+              <span class="typewriter-cursor">|</span>
+            </div>
+            <p class="hero-description reveal" data-delay="4">
+              Senior Software Engineer with 5+ years of experience building
+              scalable web applications. IIT Guwahati graduate specializing in
+              Frontend Architecture & Development.
+            </p>
+            <div class="hero-cta reveal" data-delay="5">
+              <button class="btn btn-primary" id="downloadButton">
+                <svg
+                  class="btn-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download Resume
+              </button>
+              <a href="#contact" class="btn btn-outline">Get In Touch</a>
+            </div>
+          </div>
+          <div class="hero-image-wrapper reveal" data-delay="3">
+            <div class="hero-image-border"></div>
             <img
-              class="download-logo"
-              src="./src/images/download.svg"
-              alt="download-logo"
+              class="hero-image"
+              src="./src/images/profile.png"
+              alt="Bikash Das - Software Developer"
             />
-            Download Resume
-          </button>
-        </div>
-        <div>
-          <img
-            class="profile-image"
-            src="./src/images/profile.jpeg"
-            alt="profile-image"
-          />
-        </div>
-      </div>
-      <div class="footer">
-        <div class="footer-item">
-          Education
-          <div class="footer-item-text">
-            B.Tech,
-            <i>IIT Guwahati (2016-2020)</i>
           </div>
         </div>
-        <div class="footer-item">
-          Coding Profiles
-          <div class="coding-profile-logo-container">
-            <a href="https://github.com/bikashdas0108" target="_blank">
+        <div class="hero-footer reveal" data-delay="6">
+          <div class="hero-footer-item">
+            <span class="hero-footer-label">Education</span>
+            <span class="hero-footer-value">
+              B.Tech, <i>IIT Guwahati (2016-2020)</i>
+            </span>
+          </div>
+          <div class="hero-footer-item">
+            <span class="hero-footer-label">Coding Profiles</span>
+            <div class="coding-profile-links">
+              <a
+                href="https://github.com/bikashdas0108"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Profile"
+              >
+                <img
+                  class="coding-profile-logo"
+                  src="./src/images/github-logo.png"
+                  alt="GitHub"
+                />
+              </a>
+              <a
+                href="https://auth.geeksforgeeks.org/user/bikashdas0108"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GeeksforGeeks Profile"
+              >
+                <img
+                  class="coding-profile-logo"
+                  src="./src/images/gfg-logo.png"
+                  alt="GeeksforGeeks"
+                />
+              </a>
+              <a
+                href="https://leetcode.com/bikashdas0108/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LeetCode Profile"
+              >
+                <img
+                  class="coding-profile-logo"
+                  src="./src/images/leetcode-logo.png"
+                  alt="LeetCode"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-indicator" aria-hidden="true">
+          <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section with Stats -->
+      <section id="about" class="section about-page">
+        <div class="section-container">
+          <h2 class="section-header reveal">
+            <span class="section-number">01.</span> About Me
+          </h2>
+          <div class="about-content">
+            <div class="about-text reveal">
+              <p>
+                Hi there! I'm Bikash Das, a passionate Software Developer,
+                graduated from IIT Guwahati (class of 2020), who crafts digital
+                experiences. With 5+ years of coding experience, I specialize in
+                Frontend Web Development. Love to build Frontend architectures
+                that can turn ideas into interactive realities. Let's code
+                something amazing together!
+              </p>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card reveal" data-delay="1">
+                <div class="stat-number" data-target="5">0</div>
+                <div class="stat-label">Years of Experience</div>
+              </div>
+              <div class="stat-card reveal" data-delay="2">
+                <div class="stat-number" data-target="3">0</div>
+                <div class="stat-label">Companies Worked</div>
+              </div>
+              <div class="stat-card reveal" data-delay="3">
+                <div class="stat-number" data-target="100" data-suffix="K+">
+                  0
+                </div>
+                <div class="stat-label">Lines of Code</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="section skills-page">
+        <div class="section-container">
+          <h2 class="section-header reveal">
+            <span class="section-number">02.</span> Skills
+          </h2>
+          <div id="skillsContainer" class="skills-container"></div>
+        </div>
+      </section>
+
+      <!-- Work Experience Section -->
+      <section id="workExperience" class="section experience-page">
+        <div class="section-container">
+          <h2 class="section-header reveal">
+            <span class="section-number">03.</span> Work Experience
+          </h2>
+          <div id="experienceContainer" class="experience-container"></div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="section projects-page">
+        <div class="section-container">
+          <h2 class="section-header reveal">
+            <span class="section-number">04.</span> Projects
+          </h2>
+          <div id="projectsContainer" class="projects-container"></div>
+        </div>
+      </section>
+
+      <!-- Achievements Section -->
+      <section id="achievements" class="section achievements-page">
+        <div class="section-container">
+          <h2 class="section-header reveal">
+            <span class="section-number">05.</span> Key Achievements
+          </h2>
+          <div class="achievements-container">
+            <div class="achievement-card reveal" data-delay="1">
+              <div class="achievement-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="8" r="7" />
+                  <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                </svg>
+              </div>
+              <h3 class="achievement-title">Culture Champion Award</h3>
+              <p class="achievement-company">Virtual Internships</p>
+              <p class="achievement-description">
+                Received recognition twice for contributions to the team's
+                overall success, demonstrating leadership and collaborative
+                excellence.
+              </p>
+              <div class="achievement-badge">Awarded 3x</div>
+            </div>
+            <div class="achievement-card reveal" data-delay="2">
+              <div class="achievement-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  />
+                </svg>
+              </div>
+              <h3 class="achievement-title">Spotlight Performer Award</h3>
+              <p class="achievement-company">Jio Platforms Ltd. (Health.Jio)</p>
+              <p class="achievement-description">
+                Recognised thrice for contributions to the team's collective
+                achievements, reflecting consistent high performance and impact.
+              </p>
+              <div class="achievement-badge">Awarded 3x</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section contact-page">
+        <div class="section-container">
+          <h2 class="section-header reveal">
+            <span class="section-number">06.</span> Get In Touch
+          </h2>
+          <p class="contact-description reveal" data-delay="1">
+            I'm currently open to new opportunities. Whether you have a question
+            or just want to say hi, my inbox is always open. I'll try my best to
+            get back to you!
+          </p>
+          <a
+            href="mailto:bikashdas0108@gmail.com"
+            class="btn btn-primary btn-large reveal"
+            data-delay="2"
+          >
+            Say Hello
+          </a>
+          <div class="contact-social reveal" data-delay="3">
+            <a
+              href="https://www.linkedin.com/in/bikash-das-918104154"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
               <img
-                class="coding-profile-logo"
-                src="./src/images/github-logo.png"
-                alt="github-logo"
+                class="social-media-logo"
+                src="./src/images/linkedin-logo.svg"
+                alt="LinkedIn"
               />
             </a>
             <a
-              href="https://auth.geeksforgeeks.org/user/bikashdas0108"
+              href="https://www.facebook.com/skkumarbaisya"
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
             >
               <img
-                class="coding-profile-logo"
-                src="./src/images/gfg-logo.png"
-                alt="gfg-logo"
+                class="social-media-logo"
+                src="./src/images/fb-logo.svg"
+                alt="Facebook"
               />
             </a>
-            <a href="https://leetcode.com/bikashdas0108/" target="_blank">
+            <a
+              href="https://www.instagram.com/ssbikash?igsh=OTBpbmJrZGlnaWp1"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
               <img
-                class="coding-profile-logo"
-                src="./src/images/leetcode-logo.png"
-                alt="leetcode-logo"
+                class="social-media-logo"
+                src="./src/images/insta-logo.svg"
+                alt="Instagram"
+              />
+            </a>
+            <a
+              href="mailto:bikashdas0108@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Email"
+            >
+              <img
+                class="social-media-logo"
+                src="./src/images/gmail-logo.svg"
+                alt="Gmail"
               />
             </a>
           </div>
         </div>
-      </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <p class="footer-text">Designed & Built by Bikash Das</p>
+      <p class="footer-text footer-love">
+        Made with <span class="heart">&#10084;</span>
+      </p>
+    </footer>
+
+    <!-- Fixed Social Sidebar (left) -->
+    <div class="social-sidebar" aria-label="Social links">
+      <a
+        href="https://github.com/bikashdas0108"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+      >
+        <img src="./src/images/github-logo.png" alt="GitHub" />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/bikash-das-918104154"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+      >
+        <img src="./src/images/linkedin-logo.svg" alt="LinkedIn" />
+      </a>
+      <a
+        href="https://leetcode.com/bikashdas0108/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LeetCode"
+      >
+        <img src="./src/images/leetcode-logo.png" alt="LeetCode" />
+      </a>
+      <div class="sidebar-line"></div>
     </div>
-    <div id="skills" class="skills-page">
-      <div class="section-header">Skills</div>
-      <div id="skillsContainer" class="skills-container"></div>
-    </div>
-    <div id="projects" class="projects-page">
-      <div class="section-header text-color">Projects</div>
-      <div id="projectsContainer" class="projects-container"></div>
-    </div>
-    <div id="workExperience" class="experience-page">
-      <div class="section-header">Work Experience</div>
-      <div id="experienceContainer" class="experience-container"></div>
-    </div>
-    <div id="about" class="social-media-page">
-      <div class="section-header text-color">About Me !!!</div>
-      <div class="about-section">
-        🚀 Hi there! I'm Bikash Das, a passionate Software Developer, graduated
-        from IIT Guwahati (class of 2020), who crafts digital experiences. With
-        5+ years of coding experience, I specialize in Frontend Web Development.
-        Love to build Frontend architectures that can turn ideas into
-        interactive realities. Let's code something amazing together!
-      </div>
-      <div class="section-header text-color">Get In Touch</div>
-      <div class="social-media-container">
-        <a
-          href="https://www.linkedin.com/in/bikash-das-918104154"
-          target="_blank"
-        >
-          <img
-            class="social-media-logo"
-            src="./src/images/linkedin-logo.svg"
-            alt="linkedin-logo"
-          />
-        </a>
-        <a href="https://www.facebook.com/skkumarbaisya" target="_blank">
-          <img
-            class="social-media-logo"
-            src="./src/images/fb-logo.svg"
-            alt="fb-logo"
-          />
-        </a>
-        <a
-          href="https://www.instagram.com/ssbikash?igsh=OTBpbmJrZGlnaWp1"
-          target="_blank"
-        >
-          <img
-            class="social-media-logo"
-            src="./src/images/insta-logo.svg"
-            alt="insta-logo"
-          />
-        </a>
-        <a href="mailto:bikashdas0108@gmail.com" target="_blank">
-          <img
-            class="social-media-logo"
-            src="./src/images/gmail-logo.svg"
-            alt="gmail-logo"
-          />
-        </a>
-      </div>
-      <p class="madewithlove">Made with ❤️</p>
-      <p class="version">v1.0.0</p>
+
+    <!-- Fixed Email Sidebar (right) -->
+    <div class="email-sidebar" aria-label="Email">
+      <a href="mailto:bikashdas0108@gmail.com">bikashdas0108@gmail.com</a>
+      <div class="sidebar-line"></div>
     </div>
   </body>
 </html>

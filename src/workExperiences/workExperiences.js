@@ -1,16 +1,6 @@
 const experienceContainerElement = document.getElementById(
-  "experienceContainer",
+  "experienceContainer"
 );
-
-const getBorder = (num) => {
-  if (num % 3 === 0) {
-    return "border-left: 8px solid orange";
-  } else if (num % 2 === 0) {
-    return "border-left: 8px solid pink";
-  } else {
-    return "border-left: 8px solid lightGreen";
-  }
-};
 
 const experiences = [
   {
@@ -24,8 +14,9 @@ const experiences = [
       "RTK",
       "RTKQ",
       "Tailwind",
-      "MUi",
-      "antd",
+      "MUI",
+      "AntD",
+      "Mantine",
       "NodeJs",
       "ExpressJs",
       "TypeORM",
@@ -35,12 +26,14 @@ const experiences = [
       {
         role: "Senior Software Engineer (SDE3)",
         description:
-          "Leading and scaling the frontend team while driving architectural decisions, feature roadmaps, and end-to-end project delivery. Spearheading performance optimization, monitoring, and observability initiatives. Actively mentoring engineers and establishing best practices through comprehensive code reviews.",
+          "Led the frontend team, managing planning, unblocking members, and creating LLD for new features. Established observability and monitoring systems to improve application stability, performance tracking, and incident response. Increased performance score by 30% using prefetch, lazy loading, code splitting and RTKQ caching. Improved scalability of the application by implementing modular design. Implemented LLM integration into profile and internship creation flows, enhancing user engagement.",
+        highlights: ["Led frontend team", "30% performance increase", "LLM integration"],
       },
       {
         role: "Senior Frontend Engineer (SDE2)",
         description:
-          "My role as a Senior Frontend Engineer involves decision making, planning, coding, performance monitoring, security measuring, mentoring and code reviews.",
+          "Developed an end-to-end platform for partner universities with features like authentication, multi user access, and placement report statistics. Achieved 90% code coverage by writing unit test cases. Developed a scalable backend architecture and database schema from scratch, ensuring performance and reliability.",
+        highlights: ["90% code coverage", "End-to-end platform", "Backend architecture"],
       },
     ],
   },
@@ -49,12 +42,13 @@ const experiences = [
     link: "https://tekion.com/",
     duration: "June 2023 to Jan 2024",
     location: "Bengaluru, India",
-    techStack: ["JavaScript", "ReactJs", "Redux", "SCSS", "antd"],
+    techStack: ["JavaScript", "ReactJs", "Redux", "SCSS", "AntD"],
     data: [
       {
         role: "Software Engineer",
         description:
-          "My role as an SWE involved writing code for new features, resolving critical bugs, and maintaining the quality of code through PR reviews of my fellow developers.",
+          "Developed Custom Hooks and Higher Order Components (HOCs) to eliminate code duplication and to improve reusability of code. Implemented advanced performance optimisation techniques, including Pure Component, debouncing, and memoization, to enhance overall efficiency of the CRM platform. Optimised performance by eliminating redundant API calls, resulting in a 40% reduction in load time. Reduced bug resolution time by ~50% using basic coding principles like DRY and SRP.",
+        highlights: ["40% load time reduction", "50% faster bug resolution", "Custom Hooks & HOCs"],
       },
     ],
   },
@@ -75,47 +69,130 @@ const experiences = [
       {
         role: "SDE2",
         description:
-          "As an SDE2, my primary role was to collaborate with product managers and designers for all new features and designs, create LLDs for the features, write scalable code, and guide my juniors.",
+          "Developed a Render Engine that can efficiently process JSON files and transform them into JSX, reducing the JS bundle size and the page load time. Guided a Team and collaborated with product managers, backend developers, and designers to develop a customisable user dashboard for JioHealth, leveraging a config-driven-ui.",
+        highlights: ["Render Engine", "Config-driven UI", "Team leadership"],
       },
       {
         role: "SDE1",
         description:
-          "My role as a SDE involved writing code for new features, resolving critical bugs, writing test cases for the features, and maintaining the quality of code through PR reviews of my fellow developers.",
+          "Developed complex workflows such as the Corporate and CoWIN Vaccination Booking, which facilitated vaccination for over 1M individuals through the application. Increased user base by more than 200K by implementing ABDM workflows to create, link and unlink ABHA accounts. Cut down the software release cycle by 30% by implementing CI/CD pipelines to automate the build and release of the web-apps.",
+        highlights: ["1M+ vaccinations facilitated", "200K+ new users", "30% faster releases"],
       },
     ],
   },
 ];
 
+const accentColors = [
+  { border: "var(--accent)", bg: "var(--accent-glow)" },
+  { border: "var(--purple)", bg: "var(--purple-glow)" },
+  { border: "var(--green)", bg: "rgba(16, 185, 129, 0.15)" },
+];
+
+// Build experience timeline using safe DOM methods
 const showExperiences = () => {
-  const experienceHtml = experiences.map((experience, i = 0) => {
-    const techList = experience.techStack?.map(
-      (techItem) =>
-        `<span class='tech' style='${getColor(techItem)}'>#${techItem}</span>`,
-    );
+  const fragment = document.createDocumentFragment();
 
-    const description = experience.data?.map(
-      (dataItem) => `<div class='data-wrapper'>
-        <div class='role'>${dataItem.role}</div>
-        <div class='description'>${dataItem.description}</div>
-      </div>`,
-    );
+  experiences.forEach((experience, i) => {
+    const color = accentColors[i % accentColors.length];
 
-    return `<div style='${getBorder(i + 1)}' class="experience-wrapper">
-        <div class="experience-wrapper-left">
-          <a href=${experience.link} target="_blank">
-            <div class="company">${experience.company || ""}</div>
-          </a>
-          <div class="location">${experience.location || ""}</div>
-          <div class="duration">${experience.duration}</div>
-        </div>
-        <div class="experience-wrapper-right">
-          <div class="data">${description?.join("") || ""}</div>
-          <div class="tech-list">${techList?.join("") || ""}</div>
-        </div>
-      </div>`;
+    const timelineItem = document.createElement("div");
+    timelineItem.className = "timeline-item reveal";
+    timelineItem.setAttribute("data-delay", i + 1);
+
+    // Dot
+    const dot = document.createElement("div");
+    dot.className = "timeline-dot";
+    dot.style.background = color.border;
+    dot.style.boxShadow = "0 0 12px " + color.bg;
+    timelineItem.appendChild(dot);
+
+    // Card
+    const card = document.createElement("div");
+    card.className = "timeline-card";
+    card.style.borderLeft = "3px solid " + color.border;
+
+    // Header
+    const header = document.createElement("div");
+    header.className = "timeline-card-header";
+
+    const companyInfo = document.createElement("div");
+    companyInfo.className = "exp-company-info";
+
+    const companyLink = document.createElement("a");
+    companyLink.href = experience.link;
+    companyLink.target = "_blank";
+    companyLink.rel = "noopener noreferrer";
+    const companyName = document.createElement("h3");
+    companyName.className = "exp-company";
+    companyName.textContent = experience.company;
+    companyLink.appendChild(companyName);
+    companyInfo.appendChild(companyLink);
+
+    const locationSpan = document.createElement("span");
+    locationSpan.className = "exp-location";
+    locationSpan.textContent = experience.location;
+    companyInfo.appendChild(locationSpan);
+
+    const durationSpan = document.createElement("span");
+    durationSpan.className = "exp-duration";
+    durationSpan.textContent = experience.duration;
+
+    header.appendChild(companyInfo);
+    header.appendChild(durationSpan);
+    card.appendChild(header);
+
+    // Roles
+    const rolesDiv = document.createElement("div");
+    rolesDiv.className = "exp-roles";
+
+    experience.data?.forEach((dataItem) => {
+      const roleBlock = document.createElement("div");
+      roleBlock.className = "exp-role-block";
+
+      const roleTitle = document.createElement("h4");
+      roleTitle.className = "exp-role";
+      roleTitle.textContent = dataItem.role;
+      roleBlock.appendChild(roleTitle);
+
+      if (dataItem.highlights) {
+        const highlightsDiv = document.createElement("div");
+        highlightsDiv.className = "exp-highlights";
+        dataItem.highlights.forEach((h) => {
+          const badge = document.createElement("span");
+          badge.className = "exp-highlight";
+          badge.textContent = h;
+          highlightsDiv.appendChild(badge);
+        });
+        roleBlock.appendChild(highlightsDiv);
+      }
+
+      const descP = document.createElement("p");
+      descP.className = "exp-description";
+      descP.textContent = dataItem.description;
+      roleBlock.appendChild(descP);
+
+      rolesDiv.appendChild(roleBlock);
+    });
+
+    card.appendChild(rolesDiv);
+
+    // Tech list
+    const techListDiv = document.createElement("div");
+    techListDiv.className = "exp-tech-list";
+    experience.techStack?.forEach((techItem) => {
+      const span = document.createElement("span");
+      span.className = "exp-tech";
+      span.style.cssText = getColor(techItem);
+      span.textContent = techItem;
+      techListDiv.appendChild(span);
+    });
+    card.appendChild(techListDiv);
+
+    timelineItem.appendChild(card);
+    fragment.appendChild(timelineItem);
   });
 
-  experienceContainerElement.innerHTML = experienceHtml.join("");
+  experienceContainerElement.appendChild(fragment);
 };
 
 showExperiences();
