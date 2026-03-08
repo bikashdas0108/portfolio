@@ -102,10 +102,15 @@ const revealObserver = new IntersectionObserver(
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("active");
+        // Trigger counter animation when stat-card becomes active
+        if (entry.target.classList.contains("stat-card")) {
+          const num = entry.target.querySelector(".stat-number");
+          if (num) animateCounter(num);
+        }
       }
     });
   },
-  { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+  { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
 );
 
 revealElements.forEach((el) => revealObserver.observe(el));
@@ -182,23 +187,10 @@ navLinksElement.querySelectorAll(".nav-link").forEach((link) => {
 });
 
 // ===== Counter Animation =====
-const statNumbers = document.querySelectorAll(".stat-number");
-
-const counterObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        counterObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.5 }
-);
-
-statNumbers.forEach((el) => counterObserver.observe(el));
-
 function animateCounter(element) {
+  if (element.dataset.animated) return;
+  element.dataset.animated = "true";
+
   const target = parseInt(element.dataset.target);
   const suffix = element.dataset.suffix || "+";
   const duration = 1500;
@@ -219,6 +211,25 @@ function animateCounter(element) {
 
   requestAnimationFrame(update);
 }
+
+// Observe stat cards (parent) instead of stat numbers directly.
+// Counter starts only after the card is revealed and visible.
+const counterObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.target.classList.contains("active")) {
+        const num = entry.target.querySelector(".stat-number");
+        if (num) {
+          animateCounter(num);
+          counterObserver.unobserve(entry.target);
+        }
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+
+document.querySelectorAll(".stat-card").forEach((el) => counterObserver.observe(el));
 
 // ===== Observe dynamically created elements =====
 // Re-observe after skills/projects/experiences render
@@ -241,4 +252,21 @@ const dynamicObserver = new MutationObserver((mutations) => {
 dynamicObserver.observe(document.getElementById("main"), {
   childList: true,
   subtree: true,
+});
+
+// ===== Fallback: re-observe all reveals after dynamic content loads =====
+// On cold mobile loads, IntersectionObserver may not fire reliably for
+// elements observed via MutationObserver. Re-scan after all defer scripts run.
+window.addEventListener("load", () => {
+  requestAnimationFrame(() => {
+    document.querySelectorAll(".reveal:not(.active)").forEach((el) => {
+      revealObserver.observe(el);
+    });
+    // Re-observe stat cards for counter animation
+    document.querySelectorAll(".stat-card").forEach((el) => {
+      if (!el.querySelector(".stat-number[data-animated]")) {
+        counterObserver.observe(el);
+      }
+    });
+  });
 });
