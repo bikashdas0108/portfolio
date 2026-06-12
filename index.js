@@ -187,11 +187,25 @@ navLinksElement.querySelectorAll(".nav-link").forEach((link) => {
 });
 
 // ===== Counter Animation =====
+// Completed years between a start date (YYYY-MM-DD) and today.
+function yearsSince(startDate) {
+  const start = new Date(startDate);
+  const now = new Date();
+  let years = now.getFullYear() - start.getFullYear();
+  const monthDiff = now.getMonth() - start.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < start.getDate())) {
+    years--;
+  }
+  return years;
+}
+
 function animateCounter(element) {
   if (element.dataset.animated) return;
   element.dataset.animated = "true";
 
-  const target = parseInt(element.dataset.target);
+  const target = element.dataset.since
+    ? yearsSince(element.dataset.since)
+    : parseInt(element.dataset.target);
   const suffix = element.dataset.suffix || "+";
   const duration = 1500;
   const startTime = performance.now();

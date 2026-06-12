@@ -1,12 +1,31 @@
 const experienceContainerElement = document.getElementById(
-  "experienceContainer"
+  "experienceContainer",
 );
 
 const experiences = [
   {
+    company: "Procore Technologies",
+    link: "https://www.procore.com/",
+    duration: "June 2026 to present",
+    location: "Bengaluru, India (Hybrid)",
+    techStack: [
+      "JavaScript",
+      "TypeScript",
+      "ReactJs",
+      "Zustand",
+      "React Query",
+      "Styled Components",
+    ],
+    data: [
+      {
+        role: "Senior Software Engineer",
+      },
+    ],
+  },
+  {
     company: "Virtual Internships",
     link: "https://www.virtualinternships.com/",
-    duration: "Jan 2024 to present",
+    duration: "Jan 2024 to May 2026",
     location: "UK (Remote)",
     techStack: [
       "TypeScript",
@@ -24,16 +43,30 @@ const experiences = [
     ],
     data: [
       {
+        role: "Frontend Team Lead",
+        description:
+          "Led the frontend team, managing planning, unblocking members, and creating LLD for new features. Established observability and monitoring systems to improve application stability, performance tracking, and incident response.",
+        highlights: ["Project Planning", "Coding Standards", "Team Leadership"],
+      },
+      {
         role: "Senior Software Engineer (SDE3)",
         description:
-          "Led the frontend team, managing planning, unblocking members, and creating LLD for new features. Established observability and monitoring systems to improve application stability, performance tracking, and incident response. Increased performance score by 30% using prefetch, lazy loading, code splitting and RTKQ caching. Improved scalability of the application by implementing modular design. Implemented LLM integration into profile and internship creation flows, enhancing user engagement.",
-        highlights: ["Led frontend team", "30% performance increase", "LLM integration"],
+          "Increased performance score by 30% using prefetch, lazy loading, code splitting and RTKQ caching. Improved scalability of the application by implementing modular design. Implemented LLM integration into profile and internship creation flows, enhancing user engagement.",
+        highlights: [
+          "Led frontend team",
+          "30% performance increase",
+          "LLM integration",
+        ],
       },
       {
         role: "Senior Frontend Engineer (SDE2)",
         description:
           "Developed an end-to-end platform for partner universities with features like authentication, multi user access, and placement report statistics. Achieved 90% code coverage by writing unit test cases. Developed a scalable backend architecture and database schema from scratch, ensuring performance and reliability.",
-        highlights: ["90% code coverage", "End-to-end platform", "Backend architecture"],
+        highlights: [
+          "90% code coverage",
+          "End-to-end platform",
+          "Backend architecture",
+        ],
       },
     ],
   },
@@ -48,7 +81,11 @@ const experiences = [
         role: "Software Engineer",
         description:
           "Developed Custom Hooks and Higher Order Components (HOCs) to eliminate code duplication and to improve reusability of code. Implemented advanced performance optimisation techniques, including Pure Component, debouncing, and memoization, to enhance overall efficiency of the CRM platform. Optimised performance by eliminating redundant API calls, resulting in a 40% reduction in load time. Reduced bug resolution time by ~50% using basic coding principles like DRY and SRP.",
-        highlights: ["40% load time reduction", "50% faster bug resolution", "Custom Hooks & HOCs"],
+        highlights: [
+          "40% load time reduction",
+          "50% faster bug resolution",
+          "Custom Hooks & HOCs",
+        ],
       },
     ],
   },
@@ -76,7 +113,11 @@ const experiences = [
         role: "SDE1",
         description:
           "Developed complex workflows such as the Corporate and CoWIN Vaccination Booking, which facilitated vaccination for over 1M individuals through the application. Increased user base by more than 200K by implementing ABDM workflows to create, link and unlink ABHA accounts. Cut down the software release cycle by 30% by implementing CI/CD pipelines to automate the build and release of the web-apps.",
-        highlights: ["1M+ vaccinations facilitated", "200K+ new users", "30% faster releases"],
+        highlights: [
+          "1M+ vaccinations facilitated",
+          "200K+ new users",
+          "30% faster releases",
+        ],
       },
     ],
   },
@@ -166,10 +207,12 @@ const showExperiences = () => {
         roleBlock.appendChild(highlightsDiv);
       }
 
-      const descP = document.createElement("p");
-      descP.className = "exp-description";
-      descP.textContent = dataItem.description;
-      roleBlock.appendChild(descP);
+      if (dataItem.description) {
+        const descP = document.createElement("p");
+        descP.className = "exp-description";
+        descP.textContent = dataItem.description;
+        roleBlock.appendChild(descP);
+      }
 
       rolesDiv.appendChild(roleBlock);
     });
