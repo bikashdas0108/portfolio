@@ -16,6 +16,8 @@ const skillCategories = [
       { logo: "./src/images/redux-logo.png", name: "Redux" },
       { logo: null, name: "RTK" },
       { logo: null, name: "RTKQ" },
+      { logo: null, name: "React Query" },
+      { logo: null, name: "Zustand" },
       { logo: "./src/images/es6-logo.png", name: "ES6" },
     ],
   },
@@ -30,6 +32,7 @@ const skillCategories = [
       { logo: "./src/images/mui-logo.png", name: "MUI" },
       { logo: null, name: "AntD" },
       { logo: null, name: "Mantine" },
+      { logo: null, name: "Styled Components" },
     ],
   },
   {
