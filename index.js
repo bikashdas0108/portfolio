@@ -94,26 +94,49 @@ function downloadPDF() {
 
 downloadButtonElement.addEventListener("click", downloadPDF);
 
-// ===== Scroll Reveal (Intersection Observer) =====
-const revealElements = document.querySelectorAll(".reveal");
-
+// ===== Scroll Reveal (Intersection Observer + geometry fallback) =====
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-        // Trigger counter animation when stat-card becomes active
-        if (entry.target.classList.contains("stat-card")) {
-          const num = entry.target.querySelector(".stat-number");
-          if (num) animateCounter(num);
-        }
+        activateReveal(entry.target);
+        revealObserver.unobserve(entry.target);
       }
     });
   },
   { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
 );
 
-revealElements.forEach((el) => revealObserver.observe(el));
+function activateReveal(el) {
+  if (el.classList.contains("active")) return;
+  el.classList.add("active");
+  // Trigger counter animation when a stat-card becomes active
+  if (el.classList.contains("stat-card")) {
+    const num = el.querySelector(".stat-number");
+    if (num) animateCounter(num);
+  }
+}
+
+function observeReveal(el) {
+  if (!el.classList.contains("active")) revealObserver.observe(el);
+}
+
+// Geometry fallback. IntersectionObserver can drop activations on mobile —
+// fast/fling scrolling carries an element through the viewport before the
+// observer reports it, and observe() is a no-op when re-called. This checks
+// real positions so any element that has reached the viewport is revealed,
+// guaranteeing sections never stay blank.
+function revealInView() {
+  const trigger = window.innerHeight * 0.9;
+  document.querySelectorAll(".reveal:not(.active)").forEach((el) => {
+    if (el.getBoundingClientRect().top < trigger) {
+      activateReveal(el);
+      revealObserver.unobserve(el);
+    }
+  });
+}
+
+document.querySelectorAll(".reveal").forEach(observeReveal);
 
 // ===== Active Navigation on Scroll =====
 const sections = document.querySelectorAll("section[id]");
@@ -160,10 +183,16 @@ function handleNavScroll() {
 
 window.addEventListener("scroll", () => {
   if (!ticking) {
-    requestAnimationFrame(handleNavScroll);
+    requestAnimationFrame(() => {
+      handleNavScroll();
+      revealInView();
+    });
     ticking = true;
   }
 });
+
+// Viewport height changes on mobile (orientation, address-bar show/hide)
+window.addEventListener("resize", revealInView);
 
 // ===== Mobile Hamburger Menu =====
 function toggleMobileMenu() {
@@ -254,13 +283,15 @@ const dynamicObserver = new MutationObserver((mutations) => {
         const reveals = node.querySelectorAll
           ? node.querySelectorAll(".reveal")
           : [];
-        reveals.forEach((el) => revealObserver.observe(el));
+        reveals.forEach(observeReveal);
         if (node.classList && node.classList.contains("reveal")) {
-          revealObserver.observe(node);
+          observeReveal(node);
         }
       }
     });
   });
+  // Injected content may already be within the viewport on load
+  revealInView();
 });
 
 dynamicObserver.observe(document.getElementById("main"), {
@@ -268,19 +299,12 @@ dynamicObserver.observe(document.getElementById("main"), {
   subtree: true,
 });
 
-// ===== Fallback: re-observe all reveals after dynamic content loads =====
-// On cold mobile loads, IntersectionObserver may not fire reliably for
-// elements observed via MutationObserver. Re-scan after all defer scripts run.
+// ===== Fallback: ensure everything in view is revealed after full load =====
+// After all deferred scripts and layout settle, observe any remaining reveals
+// and force-activate whatever is already within the viewport.
 window.addEventListener("load", () => {
   requestAnimationFrame(() => {
-    document.querySelectorAll(".reveal:not(.active)").forEach((el) => {
-      revealObserver.observe(el);
-    });
-    // Re-observe stat cards for counter animation
-    document.querySelectorAll(".stat-card").forEach((el) => {
-      if (!el.querySelector(".stat-number[data-animated]")) {
-        counterObserver.observe(el);
-      }
-    });
+    document.querySelectorAll(".reveal:not(.active)").forEach(observeReveal);
+    revealInView();
   });
 });
